@@ -1,0 +1,5 @@
+configuration {
+	theme: "~/.config/rofi/nord.rasi";
+    font: "FiraCode NF 16";
+}
+/* @import "/usr/share/rofi/themes/Arc-Dark-Polo.rasi" */
