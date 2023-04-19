@@ -1,0 +1,70 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+precmd () {print -Pn "\e]0;${PWD/$HOME/\~}\a"} # set terminal title
+ulimit -s 65520
+
+
+# History
+HISTSIZE=200000
+SAVEHIST=50000
+HISTFILE=$ZDOTDIR/.zsh_history
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_all_dups   # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data
+setopt inc_append_history
+
+# Directory stack
+setopt autocd auto_pushd pushd_ignore_dups
+
+# Tab completions
+zstyle ':completion:*' menu select
+setopt complete_in_word
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|[._-]=* r:|=* l:|=*' # case insensitive and substring completion
+zmodload zsh/complist
+autoload -Uz compinit
+compinit
+eval "$(zoxide init zsh)"
+# Completion for kitty
+# kitty + complete setup zsh | source /dev/stdin
+# eval "$(bw completion --shell zsh); compdef _bw bw;" # bitwarden auto completion
+
+bindkey -M viins '^O' forward-word
+
+# History search with beginning of the line
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+
+# vi-mode
+source $ZDOTDIR/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
+export ZVM_VI_EDITOR='vim'
+
+# fzf
+[ -f $ZDOTDIR/key-bindings.zsh ] && source $ZDOTDIR/key-bindings.zsh
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+source $ZDOTDIR/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+# Personal aliases and functions
+[ -f $ZDOTDIR/aliases.zsh ] && source $ZDOTDIR/aliases.zsh
+[ -f $ZDOTDIR/func.zsh ] && source $ZDOTDIR/func.zsh
+
+source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
