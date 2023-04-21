@@ -65,7 +65,7 @@ source $ZDOTDIR/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # p10k prompt
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ -f $ZDOTDIR/.p10k.zsh ]] && source $ZDOTDIR/.p10k.zsh
+[[ -f $ZDOTDIR/p10k.zsh ]] && source $ZDOTDIR/p10k.zsh
 [[ -f $ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme ]] && source $ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme
 
 # Personal aliases and functions
