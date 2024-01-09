@@ -42,8 +42,8 @@ bindkey -M viins '^O' forward-word
 autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey "^[[A" history-beginning-search-backward-end
-bindkey "^[[B" history-beginning-search-forward-end
+# bindkey "^[[A" history-beginning-search-backward-end
+# bindkey "^[[B" history-beginning-search-forward-end
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 
@@ -55,7 +55,7 @@ export ZVM_VI_EDITOR='vim'
 [ -f $ZDOTDIR/key-bindings.zsh ] && source $ZDOTDIR/key-bindings.zsh
 
 # pyenv
-if type zoxide >> /dev/null; then
+if type pyenv >> /dev/null; then
     export PYENV_ROOT="$HOME/.pyenv"
     command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
@@ -73,3 +73,11 @@ source $ZDOTDIR/zsh-autosuggestions/zsh-autosuggestions.zsh
 [ -f $ZDOTDIR/func.zsh ] && source $ZDOTDIR/func.zsh
 
 source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# pnpm
+export PNPM_HOME="/Users/tuogengchen/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
