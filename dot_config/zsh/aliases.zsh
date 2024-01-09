@@ -2,9 +2,6 @@
 alias -s {cpp,c}=nvim
 alias -g nv=nvim
 
-# fzf
-alias -g ff='$(fd -t f|fzf -m)' # select file(s) with fzf
-
 # commands
 alias nnn="nnn -e"
 alias qmk="/opt/homebrew/bin/qmk"
@@ -12,6 +9,8 @@ alias cla="/opt/homebrew/opt/llvm/bin/clang++"
 alias waifu2x='~/github/waifu2x-ncnn-vulkan/waifu2x-ncnn-vulkan'
 alias cp_main='cat ~/acm/rust/main/src/main.rs | pbcopy'
 alias lg='lazygit'
+alias rg='rg -S'
+alias bat="bat --style=plain --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo Enki-Tokyo-Night || echo OneHalfLight)"
 
 # ls
 alias ls='ls --color=auto'
@@ -22,7 +21,10 @@ alias la='ls -lAh'
 # navigation
 alias -g ...=../..
 alias -g ....=../../..
+
+if type zoxide >> /dev/null; then
 alias cd=z
+fi
 alias cdt='cd ./*(/om[1])' # cd to most recently modified child directory
 
 # Git
