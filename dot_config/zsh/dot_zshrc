@@ -30,6 +30,11 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|[._-]=* r:|=* l:|=*'
 zmodload zsh/complist
 autoload -Uz compinit
 compinit
+
+if type /opt/homebrew/bin/brew >> /dev/null; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 if type zoxide >> /dev/null; then
     eval "$(zoxide init zsh)"
 fi
@@ -37,6 +42,7 @@ fi
 # kitty + complete setup zsh | source /dev/stdin
 
 bindkey -M viins '^O' forward-word
+bindkey -M viins '^H' backward-word
 
 # History search with beginning of the line
 autoload -U history-search-end
@@ -50,9 +56,6 @@ bindkey "^[[F" end-of-line
 # vi-mode
 source $ZDOTDIR/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 export ZVM_VI_EDITOR='vim'
-
-# fzf
-[ -f $ZDOTDIR/key-bindings.zsh ] && source $ZDOTDIR/key-bindings.zsh
 
 # pyenv
 if type pyenv >> /dev/null; then
@@ -73,6 +76,11 @@ source $ZDOTDIR/zsh-autosuggestions/zsh-autosuggestions.zsh
 [ -f $ZDOTDIR/func.zsh ] && source $ZDOTDIR/func.zsh
 
 source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# fzf
+if type pyenv >> /dev/null; then
+    source <(fzf --zsh)
+fi
 
 # pnpm
 export PNPM_HOME="/Users/tuogengchen/Library/pnpm"
