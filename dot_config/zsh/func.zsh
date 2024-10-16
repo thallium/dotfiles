@@ -123,3 +123,7 @@ gen_task() {
         gsed -i "\$i\    \"$1/$2\"," Cargo.toml
     fi
 }
+
+make() {
+    /usr/bin/make $1; echo '\a'
+}
