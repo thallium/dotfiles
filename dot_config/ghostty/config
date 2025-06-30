@@ -1,0 +1,7 @@
+font-family = "Cascadia Code"
+font-size = 16
+theme = dark:tokyonight-storm,light:tokyonight-day
+macos-option-as-alt = true
+
+keybind = ctrl+tab=csi:27;5;9~
+keybind = ctrl+shift+tab=csi:27;6;9~
