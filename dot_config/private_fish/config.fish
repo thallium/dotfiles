@@ -10,9 +10,13 @@ if status is-interactive
 			end
 	end
 
+	set -gx EDITOR nvim
+
 	fish_add_path ~/go/bin
+	fish_add_path /usr/local/bin
 	fish_add_path '/Applications/Visual Studio Code.app/Contents/Resources/app/bin'
 
+	fzf --fish | source
 	zoxide init fish | source
 	starship init fish | source
 end
